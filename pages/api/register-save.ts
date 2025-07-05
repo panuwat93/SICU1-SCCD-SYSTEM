@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { google } from 'googleapis';
+import dayjs from 'dayjs';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -26,7 +27,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // เตรียมข้อมูลสำหรับเพิ่มลงชีต (แถวละ 1 รายการ)
     // [วันที่รับของ, ชื่ออุปกรณ์, วันหมดอายุ, จำนวนที่รับ, ผู้ลงทะเบียน]
-    const values = rows.map((row: any) => [dateReceive, row.item, row.expire, row.amount, registrar]);
+    const values = rows.map((row: any) => [
+      dateReceive,
+      row.item,
+      // แปลงวันหมดอายุเป็น YYYY-MM-DD
+      dayjs(row.expire).isValid() ? dayjs(row.expire).format('YYYY-MM-DD') : row.expire,
+      row.amount,
+      registrar
+    ]);
 
     // เพิ่มข้อมูลลง Google Sheet
     await sheets.spreadsheets.values.append({
