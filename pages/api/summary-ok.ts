@@ -11,8 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const y = Number(year);
     if (!m || !y) return res.status(400).json({ error: 'month and year required' });
 
-    const credentialsPath = path.join(process.cwd(), 'credentials.json');
-    const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
+    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT as string);
     const auth = new google.auth.GoogleAuth({
       credentials,
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
