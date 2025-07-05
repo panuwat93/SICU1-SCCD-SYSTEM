@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { google } from 'googleapis';
-import fs from 'fs';
-import path from 'path';
 import dayjs from 'dayjs';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -10,7 +8,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const m = Number(month);
     const y = Number(year);
     if (!m || !y) return res.status(400).json({ error: 'month and year required' });
-}
+
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT) {
+      return res.status(500).json({ error: 'Missing GOOGLE_SERVICE_ACCOUNT' });
+    }
+
     const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT as string);
     const auth = new google.auth.GoogleAuth({
       credentials,
@@ -49,4 +51,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
-} 
+}
