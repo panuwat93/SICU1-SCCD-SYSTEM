@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { google } from 'googleapis';
-import fs from 'fs';
-import path from 'path';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -9,8 +7,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const credentialsPath = path.join(process.cwd(), 'credentials.json');
-    const credentials = JSON.parse(fs.readFileSync(credentialsPath, 'utf8'));
+    // ใช้ Environment Variable แทนการอ่านไฟล์
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT) {
+      return res.status(500).json({ error: 'Missing GOOGLE_SERVICE_ACCOUNT' });
+    }
+    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT as string);
     const auth = new google.auth.GoogleAuth({
       credentials,
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
@@ -42,4 +43,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
-} 
+}
