@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export', // สำคัญ! สำหรับ static export
+  // output: 'export', // ***ลบบรรทัดนี้ออก หรือ comment ไว้***
 };
 
 module.exports = nextConfig;
