@@ -103,12 +103,12 @@ export default function Register() {
   return (
     <Box className={kanit.className} sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', py: 4 }}>
       <Container maxWidth="md">
-        <Paper elevation={4} sx={{ p: { xs: 2, md: 4 }, mb: 3, borderRadius: 4, bgcolor: '#fff' }}>
-          <Typography variant="h4" fontWeight={700} align="center" sx={{ letterSpacing: 1, color: 'primary.main', mb: 3 }}>
+        <Paper elevation={4} sx={{ p: { xs: 1, md: 4 }, mb: 3, borderRadius: 4, bgcolor: '#fff' }}>
+          <Typography variant="h4" fontWeight={700} align="center" sx={{ letterSpacing: 1, color: 'primary.main', mb: 3, fontSize: { xs: '1.2rem', sm: '2rem', md: '2.5rem' }, wordBreak: 'keep-all' }}>
             ลงทะเบียนรับของประจำวัน
           </Typography>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2} sx={{ mb: 2 }} alignItems="center" justifyContent="center">
+            <Grid container spacing={{ xs: 1, md: 2 }} sx={{ mb: 2 }} alignItems="center" justifyContent="center">
               <Grid item xs={12} md={4}>
                 <TextField
                   label="ชื่อผู้ลงทะเบียน"
@@ -125,11 +125,11 @@ export default function Register() {
                       </InputAdornment>
                     ),
                   }}
-                  sx={{ bgcolor: '#fff', borderRadius: 2, minWidth: 220, boxShadow: 1 }}
+                  sx={{ bgcolor: '#fff', borderRadius: 2, minWidth: { xs: 0, sm: 220 }, boxShadow: 1, fontSize: { xs: 14, sm: 16 } }}
                   SelectProps={{
                     MenuProps: {
                       PaperProps: {
-                        style: { minWidth: 220 },
+                        style: { minWidth: 180 },
                       },
                     },
                   }}
@@ -153,9 +153,9 @@ export default function Register() {
                   sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1 }}
                 />
               </Grid>
-              <Grid item xs={12} md={4} sx={{ textAlign: 'center' }}>
+              <Grid item xs={12} md={4} sx={{ textAlign: { xs: 'center', md: 'center' } }}>
                 <Link href="/" passHref legacyBehavior>
-                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: 4, boxShadow: 2, height: 56 }}>
+                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: { xs: 0, sm: 4 }, boxShadow: 2, height: 48, width: { xs: '100%', md: 'auto' }, fontSize: { xs: 15, sm: 17 } }}>
                     กลับหน้าหลัก
                   </Button>
                 </Link>
@@ -163,19 +163,19 @@ export default function Register() {
             </Grid>
             <Box sx={{ overflowX: 'auto', mt: 3 }}>
               <Paper elevation={2} sx={{ borderRadius: 3, bgcolor: '#f5fafe' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 18 }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'clamp(13px, 4vw, 18px)' }}>
                   <thead>
                     <tr style={{ background: '#e3f2fd' }}>
-                      <th style={{ padding: 12, fontWeight: 700, fontSize: 19, color: '#1976d2' }}>ชื่ออุปกรณ์</th>
-                      <th style={{ padding: 12, fontWeight: 700, fontSize: 19, color: '#1976d2' }}>วันหมดอายุ</th>
-                      <th style={{ padding: 12, fontWeight: 700, fontSize: 19, color: '#1976d2' }}>จำนวนที่รับ</th>
-                      <th style={{ padding: 12 }}></th>
+                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>ชื่ออุปกรณ์</th>
+                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>วันหมดอายุ</th>
+                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>จำนวนที่รับ</th>
+                      <th style={{ padding: '8px 4px' }}></th>
                     </tr>
                   </thead>
                   <tbody>
                     {rows.map((row, idx) => (
                       <tr key={idx}>
-                        <td style={{ padding: 8, minWidth: 200 }}>
+                        <td style={{ padding: '8px 4px', minWidth: 120 }}>
                           <Autocomplete
                             options={items}
                             value={row.item}
@@ -186,7 +186,7 @@ export default function Register() {
                                 label="เลือกอุปกรณ์"
                                 required
                                 size="small"
-                                sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1 }}
+                                sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 13, sm: 15 } }}
                               />
                             )}
                             fullWidth
@@ -194,41 +194,35 @@ export default function Register() {
                             autoHighlight
                           />
                         </td>
-                        <td style={{ padding: 8, minWidth: 150 }}>
+                        <td style={{ padding: '8px 4px', minWidth: 100 }}>
                           <TextField
                             label="วันหมดอายุ"
                             type="date"
                             value={row.expire}
                             onChange={(e) => handleRowChange(idx, 'expire', e.target.value)}
-                            fullWidth
-                            InputLabelProps={{ shrink: true }}
                             required
                             size="small"
-                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1 }}
+                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 13, sm: 15 }, width: { xs: 100, sm: 150 } }}
+                            InputLabelProps={{ shrink: true }}
                           />
                         </td>
-                        <td style={{ padding: 8, minWidth: 100 }}>
+                        <td style={{ padding: '8px 4px', minWidth: 80 }}>
                           <TextField
-                            label="จำนวน"
+                            label="จำนวนที่รับ"
                             type="number"
                             value={row.amount}
                             onChange={(e) => handleRowChange(idx, 'amount', e.target.value)}
-                            fullWidth
                             required
                             size="small"
-                            inputProps={{ min: 1, style: { fontSize: 18, width: 80 } }}
-                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1 }}
+                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 13, sm: 15 }, width: { xs: 70, sm: 100 } }}
+                            InputLabelProps={{ shrink: true }}
+                            inputProps={{ min: 0 }}
                           />
                         </td>
-                        <td style={{ padding: 8 }}>
-                          <IconButton color="error" onClick={() => handleRemoveRow(idx)} disabled={rows.length === 1}>
-                            <RemoveCircleIcon />
+                        <td style={{ padding: '8px 4px', minWidth: 40, textAlign: 'center' }}>
+                          <IconButton color="error" onClick={() => handleRemoveRow(idx)} disabled={rows.length === 1} size="small">
+                            <RemoveCircleIcon fontSize="small" />
                           </IconButton>
-                          {idx === rows.length - 1 && (
-                            <IconButton color="primary" onClick={handleAddRow}>
-                              <AddCircleIcon />
-                            </IconButton>
-                          )}
                         </td>
                       </tr>
                     ))}
@@ -237,8 +231,11 @@ export default function Register() {
               </Paper>
             </Box>
             <Box sx={{ mt: 3, textAlign: 'center' }}>
-              <Button type="submit" variant="contained" size="large" sx={{ fontSize: 20, px: 6, borderRadius: 3 }}>
-                บันทึกลง Google Sheet
+              <Button type="button" variant="outlined" color="primary" startIcon={<AddCircleIcon />} onClick={handleAddRow} sx={{ fontSize: { xs: 14, sm: 16 }, px: { xs: 1, sm: 3 }, borderRadius: 3, width: { xs: '100%', sm: 'auto' }, mb: 1 }}>
+                เพิ่มแถว
+              </Button>
+              <Button type="submit" variant="contained" size="large" sx={{ fontSize: { xs: 15, sm: 18 }, px: { xs: 2, sm: 6 }, borderRadius: 3, width: { xs: '100%', sm: 'auto' } }}>
+                บันทึกลง GOOGLE SHEET
               </Button>
             </Box>
           </form>

@@ -92,55 +92,55 @@ export default function Summary() {
   return (
     <Box className={kanit.className} sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', py: 4 }}>
       <Container maxWidth="md">
-        <Paper elevation={4} sx={{ p: { xs: 2, md: 4 }, mb: 3, borderRadius: 4, bgcolor: '#fff' }}>
+        <Paper elevation={4} sx={{ p: { xs: 1, md: 4 }, mb: 3, borderRadius: 4, bgcolor: '#fff' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
-            <Typography variant="h4" fontWeight={700} align="center" sx={{ flex: 1, letterSpacing: 1, color: 'primary.main' }}>
+            <Typography variant="h4" fontWeight={700} align="center" sx={{ flex: 1, letterSpacing: 1, color: 'primary.main', fontSize: { xs: '1.2rem', sm: '2rem', md: '2.5rem' }, wordBreak: 'keep-all' }}>
               สรุปประจำเดือน
             </Typography>
           </Box>
-          <Grid container spacing={3} alignItems="center" justifyContent="center" sx={{ mb: 2 }}>
-            <Grid item>
-              <FormControl size="medium">
+          <Grid container spacing={{ xs: 1, sm: 3 }} alignItems="center" justifyContent="center" sx={{ mb: 2 }}>
+            <Grid item xs={6} sm="auto">
+              <FormControl size="medium" fullWidth>
                 <InputLabel>เดือน</InputLabel>
                 <Select
                   value={month}
                   label="เดือน"
                   onChange={(e) => setMonth(Number(e.target.value))}
-                  sx={{ minWidth: 140, fontSize: 18, borderRadius: 2, bgcolor: '#f5fafe' }}
+                  sx={{ minWidth: { xs: 80, sm: 140 }, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, bgcolor: '#f5fafe' }}
                 >
                   {months.map((m) => (
-                    <MenuItem key={m.value} value={m.value} sx={{ fontSize: 18 }}>{m.label}</MenuItem>
+                    <MenuItem key={m.value} value={m.value} sx={{ fontSize: { xs: 14, sm: 18 } }}>{m.label}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item>
-              <FormControl size="medium">
+            <Grid item xs={6} sm="auto">
+              <FormControl size="medium" fullWidth>
                 <InputLabel>ปี</InputLabel>
                 <Select
                   value={year}
                   label="ปี"
                   onChange={(e) => setYear(Number(e.target.value))}
-                  sx={{ minWidth: 120, fontSize: 18, borderRadius: 2, bgcolor: '#f5fafe' }}
+                  sx={{ minWidth: { xs: 60, sm: 120 }, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, bgcolor: '#f5fafe' }}
                 >
                   {years.map((y) => (
-                    <MenuItem key={y} value={y} sx={{ fontSize: 18 }}>{y + 543}</MenuItem>
+                    <MenuItem key={y} value={y} sx={{ fontSize: { xs: 14, sm: 18 } }}>{y + 543}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm="auto" sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
               <Button
                 variant={mode === 'ok' ? 'contained' : 'outlined'}
                 onClick={() => setMode('ok')}
-                sx={{ fontWeight: 700, mx: 1, fontSize: 18, borderRadius: 2, px: 4, height: 56 }}
+                sx={{ fontWeight: 700, mx: 1, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: { xs: 40, sm: 56 }, width: { xs: '100%', sm: 'auto' }, mb: { xs: 1, sm: 0 } }}
               >
                 ตรวจสอบประจำเดือน
               </Button>
               <Button
                 variant={mode === 'register' ? 'contained' : 'outlined'}
                 onClick={() => setMode('register')}
-                sx={{ fontWeight: 700, mx: 1, fontSize: 18, borderRadius: 2, px: 4, height: 56 }}
+                sx={{ fontWeight: 700, mx: 1, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: { xs: 40, sm: 56 }, width: { xs: '100%', sm: 'auto' } }}
               >
                 ลงทะเบียนรับของประจำเดือน
               </Button>
@@ -149,34 +149,34 @@ export default function Summary() {
           {/* ตารางสรุป */}
           {mode === 'ok' ? (
             <Box sx={{ mt: 3 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="subtitle1" gutterBottom sx={{ fontSize: 20, fontWeight: 600 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 0 } }}>
+                <Typography variant="subtitle1" gutterBottom sx={{ fontSize: { xs: 16, sm: 20 }, fontWeight: 600 }}>
                   ตารางตรวจสอบประจำเดือน
                 </Typography>
                 <Link href="/" passHref legacyBehavior>
-                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: 4, boxShadow: 2, height: 48, ml: 2 }}>
+                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: { xs: 0, sm: 4 }, boxShadow: 2, height: 40, width: { xs: '100%', sm: 'auto' }, fontSize: { xs: 14, sm: 17 } }}>
                     กลับหน้าหลัก
                   </Button>
                 </Link>
               </Box>
-              <Button variant="outlined" sx={{ mb: 2, fontSize: 18, borderRadius: 2, px: 4, height: 48 }} onClick={handleExportOk}>Export Excel</Button>
+              <Button variant="outlined" sx={{ mb: 2, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: { xs: 36, sm: 48 }, width: { xs: '100%', sm: 'auto' } }} onClick={handleExportOk}>Export Excel</Button>
               {okLoading ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}><CircularProgress /></Box>
               ) : (
                 <Box sx={{ overflowX: 'auto' }}>
                   <Paper elevation={2} sx={{ borderRadius: 3, bgcolor: '#f5fafe' }}>
-                    <Table sx={{ minWidth: 400 }}>
+                    <Table sx={{ minWidth: 400, fontSize: { xs: 13, sm: 16, md: 18 } }}>
                       <TableHead>
                         <TableRow sx={{ background: '#e3f2fd' }}>
-                          <TableCell sx={{ fontWeight: 700, fontSize: 19, color: '#1976d2' }}>วันที่</TableCell>
-                          <TableCell sx={{ fontWeight: 700, fontSize: 19, color: '#1976d2' }}>ผู้ตรวจสอบ</TableCell>
+                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2' }}>วันที่</TableCell>
+                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2' }}>ผู้ตรวจสอบ</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {okTable.map((row, idx) => (
                           <TableRow key={idx}>
-                            <TableCell sx={{ fontSize: 18 }}>{dayjs(row.date).format('YYYY-MM-DD')}</TableCell>
-                            <TableCell sx={{ fontSize: 18 }}>{row.inspector}</TableCell>
+                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 } }}>{dayjs(row.date).format('YYYY-MM-DD')}</TableCell>
+                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 } }}>{row.inspector}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -187,34 +187,34 @@ export default function Summary() {
             </Box>
           ) : (
             <Box sx={{ mt: 3 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-                <Typography variant="subtitle1" gutterBottom sx={{ fontSize: 20, fontWeight: 600 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 0 } }}>
+                <Typography variant="subtitle1" gutterBottom sx={{ fontSize: { xs: 16, sm: 20 }, fontWeight: 600 }}>
                   ตารางลงทะเบียนรับของประจำเดือน
                 </Typography>
                 <Link href="/" passHref legacyBehavior>
-                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: 4, boxShadow: 2, height: 48, ml: 2 }}>
+                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: { xs: 0, sm: 4 }, boxShadow: 2, height: 40, width: { xs: '100%', sm: 'auto' }, fontSize: { xs: 14, sm: 17 } }}>
                     กลับหน้าหลัก
                   </Button>
                 </Link>
               </Box>
-              <Button variant="outlined" sx={{ mb: 2, fontSize: 18, borderRadius: 2, px: 4, height: 48 }} onClick={handleExportRegister}>Export Excel</Button>
+              <Button variant="outlined" sx={{ mb: 2, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: { xs: 36, sm: 48 }, width: { xs: '100%', sm: 'auto' } }} onClick={handleExportRegister}>Export Excel</Button>
               {registerLoading ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}><CircularProgress /></Box>
               ) : (
                 <Box sx={{ overflowX: 'auto' }}>
                   <Paper elevation={2} sx={{ borderRadius: 3, bgcolor: '#f5fafe' }}>
-                    <Table sx={{ minWidth: 400 }}>
+                    <Table sx={{ minWidth: 400, fontSize: { xs: 13, sm: 16, md: 18 } }}>
                       <TableHead>
                         <TableRow sx={{ background: '#e3f2fd' }}>
-                          <TableCell sx={{ fontWeight: 700, fontSize: 19, color: '#1976d2' }}>รายการอุปกรณ์</TableCell>
-                          <TableCell sx={{ fontWeight: 700, fontSize: 19, color: '#1976d2' }}>จำนวน</TableCell>
+                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2' }}>รายการอุปกรณ์</TableCell>
+                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2' }}>จำนวน</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {registerRows.map((row, idx) => (
                           <TableRow key={idx}>
-                            <TableCell sx={{ fontSize: 18 }}>{row.item}</TableCell>
-                            <TableCell sx={{ fontSize: 18 }}>{row.total}</TableCell>
+                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 } }}>{row.item}</TableCell>
+                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 } }}>{row.total}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>

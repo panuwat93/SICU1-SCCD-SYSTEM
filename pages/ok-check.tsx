@@ -100,11 +100,11 @@ export default function OkCheck() {
     <Box className={kanit.className} sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', py: 4 }}>
       <Container maxWidth="md">
         <Paper elevation={4} sx={{ p: { xs: 2, md: 4 }, mb: 3, borderRadius: 4, bgcolor: '#fff' }}>
-          <Typography variant="h4" fontWeight={700} align="center" sx={{ letterSpacing: 1, color: 'primary.main', mb: 3 }}>
+          <Typography variant="h4" fontWeight={700} align="center" sx={{ letterSpacing: 1, color: 'primary.main', mb: 3, fontSize: { xs: '1.5rem', sm: '2.2rem', md: '2.5rem' }, wordBreak: 'keep-all' }}>
             OK ของประจำวัน
           </Typography>
           <form onSubmit={handleSubmit}>
-            <Grid container spacing={2} sx={{ mb: 2 }} alignItems="center" justifyContent="center">
+            <Grid container spacing={{ xs: 1, md: 2 }} sx={{ mb: 2 }} alignItems="center" justifyContent="center">
               <Grid item xs={12} md={3}>
                 <TextField
                   label="วันที่ตรวจสอบ"
@@ -114,7 +114,7 @@ export default function OkCheck() {
                   fullWidth
                   InputLabelProps={{ shrink: true }}
                   required
-                  sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1 }}
+                  sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 14, sm: 16 } }}
                 />
               </Grid>
               <Grid item xs={12} md={4}>
@@ -133,11 +133,11 @@ export default function OkCheck() {
                       </InputAdornment>
                     ),
                   }}
-                  sx={{ bgcolor: '#fff', borderRadius: 2, minWidth: 220, boxShadow: 1 }}
+                  sx={{ bgcolor: '#fff', borderRadius: 2, minWidth: { xs: 0, sm: 220 }, boxShadow: 1, fontSize: { xs: 14, sm: 16 } }}
                   SelectProps={{
                     MenuProps: {
                       PaperProps: {
-                        style: { minWidth: 220 },
+                        style: { minWidth: 180 },
                       },
                     },
                   }}
@@ -149,9 +149,9 @@ export default function OkCheck() {
                   ))}
                 </TextField>
               </Grid>
-              <Grid item xs={12} md={3} sx={{ textAlign: 'center' }}>
+              <Grid item xs={12} md={3} sx={{ textAlign: { xs: 'center', md: 'center' } }}>
                 <Link href="/" passHref legacyBehavior>
-                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: 4, boxShadow: 2, height: 56 }}>
+                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: { xs: 0, sm: 4 }, boxShadow: 2, height: 48, width: { xs: '100%', md: 'auto' }, fontSize: { xs: 16, sm: 18 } }}>
                     กลับหน้าหลัก
                   </Button>
                 </Link>
@@ -159,27 +159,27 @@ export default function OkCheck() {
             </Grid>
             <Box sx={{ overflowX: 'auto', mt: 3 }}>
               <Paper elevation={2} sx={{ borderRadius: 3, bgcolor: '#f5fafe' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 18 }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'clamp(13px, 4vw, 18px)' }}>
                   <thead>
                     <tr style={{ background: '#e3f2fd' }}>
-                      <th style={{ padding: 12, fontWeight: 700, fontSize: 19, color: '#1976d2' }}>ชื่ออุปกรณ์</th>
-                      <th style={{ padding: 12, fontWeight: 700, fontSize: 19, color: '#1976d2' }}>จำนวน Stock</th>
-                      <th style={{ padding: 12, fontWeight: 700, fontSize: 19, color: '#1976d2' }}>จำนวนที่นับ</th>
+                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>ชื่ออุปกรณ์</th>
+                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>จำนวน Stock</th>
+                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>จำนวนที่นับ</th>
                     </tr>
                   </thead>
                   <tbody>
                     {items.map((item) => (
                       <tr key={item.name} style={{ background: getColor(item.name) }}>
-                        <td style={{ padding: 10 }}>{item.name}</td>
-                        <td style={{ padding: 10, textAlign: 'center', fontWeight: 700, color: '#1976d2' }}>{item.stock}</td>
-                        <td style={{ padding: 10, textAlign: 'center' }}>
+                        <td style={{ padding: '8px 4px' }}>{item.name}</td>
+                        <td style={{ padding: '8px 4px', textAlign: 'center', fontWeight: 700, color: '#1976d2' }}>{item.stock}</td>
+                        <td style={{ padding: '8px 4px', textAlign: 'center' }}>
                           <TextField
                             type="number"
-                            inputProps={{ min: 0, style: { fontSize: 18, width: 80 } }}
+                            inputProps={{ min: 0, style: { fontSize: 16, width: '60px', maxWidth: '100%' } }}
                             value={counts[item.name] || ''}
                             onChange={(e) => handleCountChange(item.name, e.target.value)}
                             required
-                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1 }}
+                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, width: { xs: 60, sm: 80 } }}
                           />
                         </td>
                       </tr>
@@ -189,7 +189,7 @@ export default function OkCheck() {
               </Paper>
             </Box>
             <Box sx={{ mt: 4, textAlign: 'center' }}>
-              <Button type="submit" variant="contained" size="large" sx={{ fontSize: 20, px: 6, borderRadius: 3 }} disabled={loading}>
+              <Button type="submit" variant="contained" size="large" sx={{ fontSize: { xs: 16, sm: 20 }, px: { xs: 2, sm: 6 }, borderRadius: 3, width: { xs: '100%', sm: 'auto' } }} disabled={loading}>
                 {loading ? 'กำลังบันทึก...' : 'บันทึกลง Google Sheet'}
               </Button>
             </Box>

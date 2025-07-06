@@ -18,28 +18,55 @@ export default function Home() {
         p: 2,
       }}
     >
-      <Container maxWidth="sm" sx={{ mt: 6, mb: 4 }}>
-        <Typography variant="h3" align="center" fontWeight={700} gutterBottom sx={{ letterSpacing: 1 }}>
+      <Container maxWidth="sm" sx={{ mt: { xs: 2, sm: 6 }, mb: { xs: 2, sm: 4 }, p: { xs: 1, sm: 2 } }}>
+        <Typography
+          variant="h3"
+          align="center"
+          fontWeight={700}
+          gutterBottom
+          sx={{
+            letterSpacing: 1,
+            fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+            wordBreak: 'keep-all',
+          }}
+        >
           SICU1 CSSD SYSTEM
         </Typography>
-        <Typography variant="h5" align="center" fontWeight={400} gutterBottom sx={{ letterSpacing: 0.5, mb: 3, color: 'primary.main' }}>
+        <Typography
+          variant="h5"
+          align="center"
+          fontWeight={400}
+          gutterBottom
+          sx={{
+            letterSpacing: 0.5,
+            mb: { xs: 2, sm: 3 },
+            color: 'primary.main',
+            fontSize: { xs: '1.1rem', sm: '1.5rem' },
+          }}
+        >
           ระบบตรวจสอบของสะอาด ICU ศัลยกรรม 1
         </Typography>
-        <Typography variant="subtitle1" align="center" color="text.secondary" gutterBottom sx={{ mb: 4 }}>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="text.secondary"
+          gutterBottom
+          sx={{ mb: { xs: 2, sm: 4 }, fontSize: { xs: '1rem', sm: '1.2rem' } }}
+        >
           เลือกเมนูที่ต้องการ
         </Typography>
-        <Stack spacing={3} alignItems="center">
+        <Stack spacing={{ xs: 2, sm: 3 }} alignItems="center">
           <Link href="/ok-check" passHref legacyBehavior>
             <Button
               fullWidth
               size="large"
               variant="contained"
               sx={{
-                fontSize: 22,
-                py: 2.5,
+                fontSize: { xs: 16, sm: 22 },
+                py: { xs: 1.5, sm: 2.5 },
                 bgcolor: '#388e3c',
                 boxShadow: 3,
-                maxWidth: 400,
+                maxWidth: { xs: '100%', sm: 400 },
                 fontWeight: 700,
                 transition: 'transform 0.1s',
                 ':hover': { bgcolor: '#2e7031', transform: 'scale(1.04)' },
@@ -54,11 +81,11 @@ export default function Home() {
               size="large"
               variant="contained"
               sx={{
-                fontSize: 22,
-                py: 2.5,
+                fontSize: { xs: 16, sm: 22 },
+                py: { xs: 1.5, sm: 2.5 },
                 bgcolor: '#1976d2',
                 boxShadow: 3,
-                maxWidth: 400,
+                maxWidth: { xs: '100%', sm: 400 },
                 fontWeight: 700,
                 transition: 'transform 0.1s',
                 ':hover': { bgcolor: '#115293', transform: 'scale(1.04)' },
@@ -73,12 +100,12 @@ export default function Home() {
               size="large"
               variant="contained"
               sx={{
-                fontSize: 22,
-                py: 2.5,
+                fontSize: { xs: 16, sm: 22 },
+                py: { xs: 1.5, sm: 2.5 },
                 bgcolor: '#fbc02d',
                 color: '#222',
                 boxShadow: 3,
-                maxWidth: 400,
+                maxWidth: { xs: '100%', sm: 400 },
                 fontWeight: 700,
                 transition: 'transform 0.1s',
                 ':hover': { bgcolor: '#f9a825', transform: 'scale(1.04)' },
@@ -93,11 +120,11 @@ export default function Home() {
               size="large"
               variant="contained"
               sx={{
-                fontSize: 22,
-                py: 2.5,
+                fontSize: { xs: 16, sm: 22 },
+                py: { xs: 1.5, sm: 2.5 },
                 bgcolor: '#8e24aa',
                 boxShadow: 3,
-                maxWidth: 400,
+                maxWidth: { xs: '100%', sm: 400 },
                 fontWeight: 700,
                 transition: 'transform 0.1s',
                 ':hover': { bgcolor: '#6d1b7b', transform: 'scale(1.04)' },
@@ -108,7 +135,7 @@ export default function Home() {
           </Link>
         </Stack>
       </Container>
-      <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 4 }}>
+      <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: { xs: 2, sm: 4 } }}>
         create by Panuwat Inkeaw
       </Typography>
     </Box>

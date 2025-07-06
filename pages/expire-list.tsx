@@ -51,13 +51,13 @@ export default function ExpireList() {
   return (
     <Box className={kanit.className} sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', py: 4 }}>
       <Container maxWidth="lg">
-        <Paper elevation={4} sx={{ p: { xs: 2, md: 4 }, mb: 3, borderRadius: 4, bgcolor: '#fff' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-            <Typography variant="h4" fontWeight={700} align="center" sx={{ flex: 1, letterSpacing: 1, color: 'primary.main' }}>
+        <Paper elevation={4} sx={{ p: { xs: 1, md: 4 }, mb: 3, borderRadius: 4, bgcolor: '#fff' }}>
+          <Box sx={{ display: 'flex', alignItems: { xs: 'stretch', md: 'center' }, flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', mb: 2, gap: { xs: 1, md: 0 } }}>
+            <Typography variant="h4" fontWeight={700} align="center" sx={{ flex: 1, letterSpacing: 1, color: 'primary.main', fontSize: { xs: '1.2rem', sm: '2rem', md: '2.5rem' }, wordBreak: 'keep-all', mb: { xs: 1, md: 0 } }}>
               รายการของใกล้หมดอายุและหมดอายุ
             </Typography>
             <Link href="/" passHref legacyBehavior>
-              <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: 4, boxShadow: 2, height: 56, ml: 2 }}>
+              <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: { xs: 0, sm: 4 }, boxShadow: 2, height: 48, width: { xs: '100%', md: 'auto' }, fontSize: { xs: 15, sm: 17 } }}>
                 กลับหน้าหลัก
               </Button>
             </Link>
@@ -69,24 +69,24 @@ export default function ExpireList() {
           ) : (
             <Box sx={{ overflowX: 'auto', mt: 2 }}>
               <Paper elevation={2} sx={{ borderRadius: 3, bgcolor: '#f5fafe' }}>
-                <Table sx={{ minWidth: 650, fontSize: 18 }}>
+                <Table sx={{ minWidth: 650, fontSize: { xs: 13, sm: 16, md: 18 } }}>
                   <TableHead>
                     <TableRow sx={{ background: '#e3f2fd' }}>
-                      <TableCell sx={{ fontWeight: 700, fontSize: 19, color: '#1976d2' }}>ชื่ออุปกรณ์</TableCell>
-                      <TableCell sx={{ fontWeight: 700, fontSize: 19, color: '#1976d2' }}>วันหมดอายุ</TableCell>
-                      <TableCell sx={{ fontWeight: 700, fontSize: 19, color: '#1976d2' }}>จำนวน</TableCell>
-                      <TableCell sx={{ fontWeight: 700, fontSize: 19, color: '#1976d2' }}>ผู้ลงทะเบียน</TableCell>
-                      <TableCell sx={{ fontWeight: 700, fontSize: 19, color: '#1976d2' }}>วันที่รับของ</TableCell>
+                      <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 16, md: 19 }, color: '#1976d2' }}>ชื่ออุปกรณ์</TableCell>
+                      <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 16, md: 19 }, color: '#1976d2' }}>วันหมดอายุ</TableCell>
+                      <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 16, md: 19 }, color: '#1976d2' }}>จำนวน</TableCell>
+                      <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 16, md: 19 }, color: '#1976d2' }}>ผู้ลงทะเบียน</TableCell>
+                      <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 16, md: 19 }, color: '#1976d2' }}>วันที่รับของ</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {rows.map((row, idx) => (
                       <TableRow key={idx} sx={{ background: getRowColor(row.expire) }}>
-                        <TableCell sx={{ fontSize: 18 }}>{row.item}</TableCell>
-                        <TableCell sx={{ fontSize: 18 }}>{excelSerialToDate(row.expire)}</TableCell>
-                        <TableCell sx={{ fontSize: 18 }}>{row.amount}</TableCell>
-                        <TableCell sx={{ fontSize: 18 }}>{row.registrar}</TableCell>
-                        <TableCell sx={{ fontSize: 18 }}>{row.dateReceive}</TableCell>
+                        <TableCell sx={{ fontSize: { xs: 13, sm: 16, md: 18 } }}>{row.item}</TableCell>
+                        <TableCell sx={{ fontSize: { xs: 13, sm: 16, md: 18 } }}>{excelSerialToDate(row.expire)}</TableCell>
+                        <TableCell sx={{ fontSize: { xs: 13, sm: 16, md: 18 } }}>{row.amount}</TableCell>
+                        <TableCell sx={{ fontSize: { xs: 13, sm: 16, md: 18 } }}>{row.registrar}</TableCell>
+                        <TableCell sx={{ fontSize: { xs: 13, sm: 16, md: 18 } }}>{row.dateReceive}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
