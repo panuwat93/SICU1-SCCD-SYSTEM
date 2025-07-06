@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Typography, Box, Paper, Grid, Button, MenuItem, Select, FormControl, InputLabel, Table, TableHead, TableRow, TableCell, TableBody, CircularProgress } from '@mui/material';
+import { Container, Typography, Box, Paper, Grid, Button, MenuItem, Select, FormControl, InputLabel, Table, TableHead, TableRow, TableCell, TableBody, CircularProgress, Stack } from '@mui/material';
 import { Kanit } from 'next/font/google';
 import dayjs from 'dayjs';
 import * as XLSX from 'xlsx';
@@ -98,7 +98,7 @@ export default function Summary() {
               สรุปประจำเดือน
             </Typography>
           </Box>
-          <Grid container spacing={{ xs: 1, sm: 3 }} alignItems="center" justifyContent="center" sx={{ mb: 2 }}>
+          <Grid container spacing={{ xs: 2, sm: 3 }} alignItems="center" justifyContent="center" sx={{ mb: 3 }}>
             <Grid item xs={6} sm="auto">
               <FormControl size="medium" fullWidth>
                 <InputLabel>เดือน</InputLabel>
@@ -106,7 +106,7 @@ export default function Summary() {
                   value={month}
                   label="เดือน"
                   onChange={(e) => setMonth(Number(e.target.value))}
-                  sx={{ minWidth: { xs: 80, sm: 140 }, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, bgcolor: '#f5fafe' }}
+                  sx={{ minWidth: { xs: 80, sm: 140 }, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, bgcolor: '#f5fafe', height: 44 }}
                 >
                   {months.map((m) => (
                     <MenuItem key={m.value} value={m.value} sx={{ fontSize: { xs: 14, sm: 18 } }}>{m.label}</MenuItem>
@@ -121,7 +121,7 @@ export default function Summary() {
                   value={year}
                   label="ปี"
                   onChange={(e) => setYear(Number(e.target.value))}
-                  sx={{ minWidth: { xs: 60, sm: 120 }, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, bgcolor: '#f5fafe' }}
+                  sx={{ minWidth: { xs: 60, sm: 120 }, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, bgcolor: '#f5fafe', height: 44 }}
                 >
                   {years.map((y) => (
                     <MenuItem key={y} value={y} sx={{ fontSize: { xs: 14, sm: 18 } }}>{y + 543}</MenuItem>
@@ -130,36 +130,38 @@ export default function Summary() {
               </FormControl>
             </Grid>
             <Grid item xs={12} sm="auto" sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
-              <Button
-                variant={mode === 'ok' ? 'contained' : 'outlined'}
-                onClick={() => setMode('ok')}
-                sx={{ fontWeight: 700, mx: 1, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: { xs: 40, sm: 56 }, width: { xs: '100%', sm: 'auto' }, mb: { xs: 1, sm: 0 } }}
-              >
-                ตรวจสอบประจำเดือน
-              </Button>
-              <Button
-                variant={mode === 'register' ? 'contained' : 'outlined'}
-                onClick={() => setMode('register')}
-                sx={{ fontWeight: 700, mx: 1, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: { xs: 40, sm: 56 }, width: { xs: '100%', sm: 'auto' } }}
-              >
-                ลงทะเบียนรับของประจำเดือน
-              </Button>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
+                <Button
+                  variant={mode === 'ok' ? 'contained' : 'outlined'}
+                  onClick={() => setMode('ok')}
+                  sx={{ fontWeight: 700, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: 40, width: { xs: '100%', sm: 'auto' } }}
+                >
+                  ตรวจสอบประจำเดือน
+                </Button>
+                <Button
+                  variant={mode === 'register' ? 'contained' : 'outlined'}
+                  onClick={() => setMode('register')}
+                  sx={{ fontWeight: 700, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: 40, width: { xs: '100%', sm: 'auto' } }}
+                >
+                  ลงทะเบียนรับของประจำเดือน
+                </Button>
+              </Stack>
             </Grid>
           </Grid>
           {/* ตารางสรุป */}
           {mode === 'ok' ? (
             <Box sx={{ mt: 3 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 0 } }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2, flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 0 } }}>
                 <Typography variant="subtitle1" gutterBottom sx={{ fontSize: { xs: 16, sm: 20 }, fontWeight: 600 }}>
                   ตารางตรวจสอบประจำเดือน
                 </Typography>
                 <Link href="/" passHref legacyBehavior>
-                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: { xs: 0, sm: 4 }, boxShadow: 2, height: 40, width: { xs: '100%', sm: 'auto' }, fontSize: { xs: 14, sm: 17 } }}>
+                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: { xs: 0, sm: 4 }, boxShadow: 2, height: 36, width: { xs: '100%', sm: 'auto' }, fontSize: { xs: 14, sm: 17 } }}>
                     กลับหน้าหลัก
                   </Button>
                 </Link>
               </Box>
-              <Button variant="outlined" sx={{ mb: 2, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: { xs: 36, sm: 48 }, width: { xs: '100%', sm: 'auto' } }} onClick={handleExportOk}>Export Excel</Button>
+              <Button variant="outlined" sx={{ mb: 2, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: 36, width: { xs: '100%', sm: 'auto' } }} onClick={handleExportOk}>Export Excel</Button>
               {okLoading ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}><CircularProgress /></Box>
               ) : (
@@ -168,15 +170,15 @@ export default function Summary() {
                     <Table sx={{ minWidth: 400, fontSize: { xs: 13, sm: 16, md: 18 } }}>
                       <TableHead>
                         <TableRow sx={{ background: '#e3f2fd' }}>
-                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2' }}>วันที่</TableCell>
-                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2' }}>ผู้ตรวจสอบ</TableCell>
+                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2', py: 1 }}>วันที่</TableCell>
+                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2', py: 1 }}>ผู้ตรวจสอบ</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {okTable.map((row, idx) => (
                           <TableRow key={idx}>
-                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 } }}>{dayjs(row.date).format('YYYY-MM-DD')}</TableCell>
-                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 } }}>{row.inspector}</TableCell>
+                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 }, py: 1 }}>{dayjs(row.date).format('YYYY-MM-DD')}</TableCell>
+                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 }, py: 1 }}>{row.inspector}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -187,17 +189,17 @@ export default function Summary() {
             </Box>
           ) : (
             <Box sx={{ mt: 3 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1, flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 0 } }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2, flexDirection: { xs: 'column', sm: 'row' }, gap: { xs: 1, sm: 0 } }}>
                 <Typography variant="subtitle1" gutterBottom sx={{ fontSize: { xs: 16, sm: 20 }, fontWeight: 600 }}>
                   ตารางลงทะเบียนรับของประจำเดือน
                 </Typography>
                 <Link href="/" passHref legacyBehavior>
-                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: { xs: 0, sm: 4 }, boxShadow: 2, height: 40, width: { xs: '100%', sm: 'auto' }, fontSize: { xs: 14, sm: 17 } }}>
+                  <Button startIcon={<ArrowBackIcon />} variant="contained" color="primary" sx={{ fontWeight: 700, borderRadius: 2, minWidth: 0, px: { xs: 0, sm: 4 }, boxShadow: 2, height: 36, width: { xs: '100%', sm: 'auto' }, fontSize: { xs: 14, sm: 17 } }}>
                     กลับหน้าหลัก
                   </Button>
                 </Link>
               </Box>
-              <Button variant="outlined" sx={{ mb: 2, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: { xs: 36, sm: 48 }, width: { xs: '100%', sm: 'auto' } }} onClick={handleExportRegister}>Export Excel</Button>
+              <Button variant="outlined" sx={{ mb: 2, fontSize: { xs: 14, sm: 18 }, borderRadius: 2, px: { xs: 2, sm: 4 }, height: 36, width: { xs: '100%', sm: 'auto' } }} onClick={handleExportRegister}>Export Excel</Button>
               {registerLoading ? (
                 <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}><CircularProgress /></Box>
               ) : (
@@ -206,15 +208,15 @@ export default function Summary() {
                     <Table sx={{ minWidth: 400, fontSize: { xs: 13, sm: 16, md: 18 } }}>
                       <TableHead>
                         <TableRow sx={{ background: '#e3f2fd' }}>
-                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2' }}>รายการอุปกรณ์</TableCell>
-                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2' }}>จำนวน</TableCell>
+                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2', py: 1 }}>รายการอุปกรณ์</TableCell>
+                          <TableCell sx={{ fontWeight: 700, fontSize: { xs: 13, sm: 19 }, color: '#1976d2', py: 1 }}>จำนวน</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {registerRows.map((row, idx) => (
                           <TableRow key={idx}>
-                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 } }}>{row.item}</TableCell>
-                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 } }}>{row.total}</TableCell>
+                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 }, py: 1 }}>{row.item}</TableCell>
+                            <TableCell sx={{ fontSize: { xs: 13, sm: 18 }, py: 1 }}>{row.total}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>

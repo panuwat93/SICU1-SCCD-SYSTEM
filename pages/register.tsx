@@ -161,74 +161,62 @@ export default function Register() {
                 </Link>
               </Grid>
             </Grid>
-            <Box sx={{ overflowX: 'auto', mt: 3 }}>
-              <Paper elevation={2} sx={{ borderRadius: 3, bgcolor: '#f5fafe' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 'clamp(13px, 4vw, 18px)' }}>
-                  <thead>
-                    <tr style={{ background: '#e3f2fd' }}>
-                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>ชื่ออุปกรณ์</th>
-                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>วันหมดอายุ</th>
-                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>จำนวนที่รับ</th>
-                      <th style={{ padding: '8px 4px' }}></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {rows.map((row, idx) => (
-                      <tr key={idx}>
-                        <td style={{ padding: '8px 4px', minWidth: 120 }}>
-                          <Autocomplete
-                            options={items}
-                            value={row.item}
-                            onChange={(_, value) => handleRowChange(idx, 'item', value || '')}
-                            renderInput={(params) => (
-                              <TextField
-                                {...params}
-                                label="เลือกอุปกรณ์"
-                                required
-                                size="small"
-                                sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 13, sm: 15 } }}
-                              />
-                            )}
-                            fullWidth
-                            disableClearable
-                            autoHighlight
-                          />
-                        </td>
-                        <td style={{ padding: '8px 4px', minWidth: 100 }}>
+            <Box sx={{ mt: 3 }}>
+              {rows.map((row, idx) => (
+                <Paper key={idx} elevation={1} sx={{ p: 2, mb: 2, borderRadius: 3, bgcolor: '#f5fafe' }}>
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item xs={12}>
+                      <Autocomplete
+                        options={items}
+                        value={row.item}
+                        onChange={(_, value) => handleRowChange(idx, 'item', value || '')}
+                        renderInput={(params) => (
                           <TextField
-                            label="วันหมดอายุ"
-                            type="date"
-                            value={row.expire}
-                            onChange={(e) => handleRowChange(idx, 'expire', e.target.value)}
+                            {...params}
+                            label="เลือกอุปกรณ์"
                             required
                             size="small"
-                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 13, sm: 15 }, width: { xs: 100, sm: 150 } }}
-                            InputLabelProps={{ shrink: true }}
+                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 13, sm: 15 } }}
                           />
-                        </td>
-                        <td style={{ padding: '8px 4px', minWidth: 80 }}>
-                          <TextField
-                            label="จำนวนที่รับ"
-                            type="number"
-                            value={row.amount}
-                            onChange={(e) => handleRowChange(idx, 'amount', e.target.value)}
-                            required
-                            size="small"
-                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 13, sm: 15 }, width: { xs: 70, sm: 100 } }}
-                            InputLabelProps={{ shrink: true }}
-                            inputProps={{ min: 0 }}
-                          />
-                        </td>
-                        <td style={{ padding: '8px 4px', minWidth: 40, textAlign: 'center' }}>
-                          <IconButton color="error" onClick={() => handleRemoveRow(idx)} disabled={rows.length === 1} size="small">
-                            <RemoveCircleIcon fontSize="small" />
-                          </IconButton>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Paper>
+                        )}
+                        fullWidth
+                        disableClearable
+                        autoHighlight
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        label="วันหมดอายุ"
+                        type="date"
+                        value={row.expire}
+                        onChange={(e) => handleRowChange(idx, 'expire', e.target.value)}
+                        required
+                        size="small"
+                        sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 13, sm: 15 }, width: '100%' }}
+                        InputLabelProps={{ shrink: true }}
+                      />
+                    </Grid>
+                    <Grid item xs={10} sm={5}>
+                      <TextField
+                        label="จำนวนที่รับ"
+                        type="number"
+                        value={row.amount}
+                        onChange={(e) => handleRowChange(idx, 'amount', e.target.value)}
+                        required
+                        size="small"
+                        sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, fontSize: { xs: 13, sm: 15 }, width: '100%' }}
+                        InputLabelProps={{ shrink: true }}
+                        inputProps={{ min: 0 }}
+                      />
+                    </Grid>
+                    <Grid item xs={2} sm={1} sx={{ textAlign: 'center' }}>
+                      <IconButton color="error" onClick={() => handleRemoveRow(idx)} disabled={rows.length === 1} size="small">
+                        <RemoveCircleIcon fontSize="small" />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              ))}
             </Box>
             <Box sx={{ mt: 3, textAlign: 'center' }}>
               <Button type="button" variant="outlined" color="primary" startIcon={<AddCircleIcon />} onClick={handleAddRow} sx={{ fontSize: { xs: 14, sm: 16 }, px: { xs: 1, sm: 3 }, borderRadius: 3, width: { xs: '100%', sm: 'auto' }, mb: 1 }}>
