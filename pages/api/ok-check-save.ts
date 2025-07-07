@@ -53,11 +53,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const sheetName = 'OKประจำวัน';
 
     // รับข้อมูลจาก body
-    const { date, inspector, counts } = req.body;
+    const { date, inspector, counts, expiredStatus } = req.body;
     // counts: { [ชื่ออุปกรณ์]: จำนวน }
 
-    // เตรียมข้อมูล 1 แถว: [วันที่, ผู้ตรวจสอบ, ...จำนวนแต่ละอุปกรณ์]
-    const row = [date, inspector, ...items.map((name) => counts[name] ?? '')];
+    // เตรียมข้อมูล 1 แถว: [วันที่, ผู้ตรวจสอบ, จำนวน, ของหมดอายุ, จำนวน, ของหมดอายุ, ...]
+    const row = [
+      date,
+      inspector,
+      ...items.flatMap((name) => [counts[name] ?? '', expiredStatus?.[name] ?? ''])
+    ];
 
     // เพิ่มข้อมูลลง Google Sheet
     await sheets.spreadsheets.values.append({

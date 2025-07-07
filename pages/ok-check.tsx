@@ -55,11 +55,18 @@ export default function OkCheck() {
   const [date, setDate] = useState(dayjs().format('YYYY-MM-DD'));
   const [inspector, setInspector] = useState('');
   const [counts, setCounts] = useState<{ [key: string]: string }>({});
+  // เพิ่ม state สำหรับสถานะของหมดอายุ
+  const [expiredStatus, setExpiredStatus] = useState<{ [key: string]: string }>({});
   const [loading, setLoading] = useState(false);
   const [snackbar, setSnackbar] = useState<{ open: boolean; message: string; severity: 'success' | 'error' }>({ open: false, message: '', severity: 'success' });
 
   const handleCountChange = (name: string, value: string) => {
     setCounts((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // ฟังก์ชันสำหรับเปลี่ยนสถานะของหมดอายุ
+  const handleExpiredChange = (name: string, value: string) => {
+    setExpiredStatus((prev) => ({ ...prev, [name]: value }));
   };
 
   const getColor = (name: string) => {
@@ -79,7 +86,8 @@ export default function OkCheck() {
       const res = await fetch('/api/ok-check-save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ date, inspector, counts }),
+        // ส่ง expiredStatus ไปด้วย
+        body: JSON.stringify({ date, inspector, counts, expiredStatus }),
       });
       if (res.ok) {
         setSnackbar({ open: true, message: 'บันทึกข้อมูลเรียบร้อย', severity: 'success' });
@@ -165,6 +173,8 @@ export default function OkCheck() {
                       <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>ชื่ออุปกรณ์</th>
                       <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>จำนวน Stock</th>
                       <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>จำนวนที่นับ</th>
+                      {/* เพิ่มหัวตารางของหมดอายุ */}
+                      <th style={{ padding: '8px 4px', fontWeight: 700, fontSize: 'clamp(14px, 4vw, 19px)', color: '#1976d2' }}>ของหมดอายุ</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -181,6 +191,20 @@ export default function OkCheck() {
                             required
                             sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, width: { xs: 60, sm: 80 } }}
                           />
+                        </td>
+                        {/* เพิ่ม dropdown ของหมดอายุ */}
+                        <td style={{ padding: '8px 4px', textAlign: 'center' }}>
+                          <TextField
+                            select
+                            value={expiredStatus[item.name] || ''}
+                            onChange={(e) => handleExpiredChange(item.name, e.target.value)}
+                            required
+                            sx={{ bgcolor: '#fff', borderRadius: 2, boxShadow: 1, minWidth: 80 }}
+                          >
+                            <MenuItem value="">เลือก</MenuItem>
+                            <MenuItem value="no">ไม่มี</MenuItem>
+                            <MenuItem value="yes">มี</MenuItem>
+                          </TextField>
                         </td>
                       </tr>
                     ))}
