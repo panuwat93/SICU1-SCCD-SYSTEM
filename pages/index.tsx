@@ -75,6 +75,8 @@ export default function Home() {
               1. OK ของประจำวัน
             </Button>
           </Link>
+
+          {/*
           <Link href="/register" passHref legacyBehavior>
             <Button
               fullWidth
@@ -114,6 +116,8 @@ export default function Home() {
               3. รายการของใกล้หมดอายุและหมดอายุ
             </Button>
           </Link>
+          */}
+
           <Link href="/summary" passHref legacyBehavior>
             <Button
               fullWidth
@@ -130,7 +134,7 @@ export default function Home() {
                 ':hover': { bgcolor: '#6d1b7b', transform: 'scale(1.04)' },
               }}
             >
-              4. สรุปประจำเดือน
+              2. สรุปประจำเดือน
             </Button>
           </Link>
         </Stack>
